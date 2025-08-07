@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+
+a{
+  text-decoration: none;
+  color: white;
+}
+a:hover{
+  color: yellow;
+}
+
+
+.ant-tabs-nav {
+  border-bottom: 1px solid rgba(0, 245, 49, 0.31);
+}
+.ant-tabs-ink-bar {
+  height: 2px;
+  background-color: rgba(0, 128, 0, 0.4) !important;
+}
+.ant-tabs-tab {
+  color: #22c55e !important;
+}
+.ant-tabs-tab:hover {
+  color: #16a34a !important; 
+  font-weight: bold;
+}
+.ant-tabs-tab.ant-tabs-tab-active {
+  color: #22c55e !important;
+  font-weight: bold;
+  border-bottom: 2px solid #22c55e !important; 
+}
+.ant-tabs-ink-bar {
+  background-color: #22c55e !important;
+}
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #22c55e !important;
+  font-weight: bold;
+}
