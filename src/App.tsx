@@ -1,12 +1,16 @@
-import './App.css'
-import { RouterProvider } from 'react-router-dom'
-import { router } from './routes'
+import "./App.css";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
+import { SidebarProvider } from "./Context/SidebarContext";
 
 
 function App() {
-  
 
-  return <RouterProvider router={router} />
+  return (
+    <SidebarProvider>
+      <RouterProvider router={router} />
+    </SidebarProvider>
+  );
 }
 
-export default App
+export default App;

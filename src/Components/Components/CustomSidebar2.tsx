@@ -15,8 +15,8 @@ import {
   ThunderboltOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Drawer, Menu } from "antd";
-import { SidebarContext } from "../../Context/SidebarContext";
+import { Menu, theme } from "antd";
+import Sider from "antd/es/layout/Sider";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -96,37 +96,36 @@ const items: MenuItem[] = [
   },
 ];
 
-
 const onClick: MenuProps["onClick"] = (e) => {
   console.log("click", e);
 };
 
-// interface CustomSidebarProps {
-//   open: boolean;
-//   onClose: () => void;
-// }
-
-const CustomSidebar = () => {
-
-  const {open,setOpen}= useContext(SidebarContext);
-
-  return (
-    <Drawer
-      title="القائمة"
-      placement="right"
-      closable={false}
-      onClose={()=>setOpen(!open)}
-      open={!open}
-
-    >
-      <Menu
-        onClick={onClick}
-        mode="inline"
-        items={items}
-        className="break-words whitespace-normal"
-      />
-    </Drawer>
-  );
+interface CustomSidebarProps {
+  open: boolean;
+  onClose: () => void;
 }
 
-export default CustomSidebar;
+import { SidebarContext  } from "../../Context/SidebarContext";
+
+const CustomSidebar2 = () => {
+  const { open } = useContext(SidebarContext)
+
+  return (
+    <Sider
+      trigger={null}
+      collapsed={open}
+      className="h-full"
+    >
+      <div className="h-[90vh] bg-white" >
+        <Menu
+          onClick={onClick}
+          mode="inline"
+          items={items}
+          className="break-words whitespace-normal"
+        />
+      </div>
+    </Sider>
+  );
+};
+
+export default CustomSidebar2;

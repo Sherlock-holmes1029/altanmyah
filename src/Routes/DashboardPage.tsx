@@ -1,4 +1,3 @@
-import React from 'react'
 import DashboardLayout from '../Components/Layout/DashboardLayout'
 import MunicipalityDataForm from '../Components/forms/MunicipalityDataForm'
 

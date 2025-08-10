@@ -1,15 +1,15 @@
 import { LogoutOutlined, MenuOutlined } from "@ant-design/icons";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col } from "antd";
-import CustomSidebar from "./CustomSidebar";
 import logo from "../../Assets/images/bankLogo2.png";
+import { SidebarContext } from "../../Context/SidebarContext";
+import { useContext } from "react";
 
 function Header() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const {open,setOpen} = useContext(SidebarContext)
 
   return (
-    <div className="bg-green-600 text-white h-[10vh] flex items-center px-4">
+    <div className="bg-(--color-greenPrime) text-white h-[10vh] flex items-center px-4">
       <Row
         className="w-full items-center"
         justify="space-between"
@@ -19,7 +19,7 @@ function Header() {
           <div className="flex items-center gap-2">
             <MenuOutlined
               className="cursor-pointer text-xl hover:text-yellow-300"
-              onClick={() => setSidebarOpen(true)}
+              onClick={()=>setOpen(!open)}
             />
             <Link
               to="/"
@@ -55,7 +55,6 @@ function Header() {
           </div>
         </Col>
       </Row>
-      <CustomSidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
     </div>
   );
 }
