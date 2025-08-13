@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import IndicatorsTable from "../Components/Components/Table";
 import DashboardLayout from "../Components/Layout/DashboardLayout";
-import { Button, Col, Row } from "antd";
-import CustomModal from "../Components/Components/CustomModal";
-import AddNewProcessModal from "../Components/Components/addNewProcessModal";
+import { Button } from "antd";
+import AddNewProcessModal from "../Components/Components/AddNewProcessModal";
+import getEsriData from "../Services/GetEsriData/getEsriData";
 
 const dummyData = [
   {
@@ -56,6 +56,14 @@ function Testing() {
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
+
+
+  useEffect(()=>{
+    async function batat() {
+       const data= await getEsriData("https://tanmiah.jo/arcgis/rest/services/RIS_DataEntry_Service/FeatureServer/43")
+    }
+    batat()
+  },[])
 
   return (
     <div className="flex flex-col items-center bg-gray-100">

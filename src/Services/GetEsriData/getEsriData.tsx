@@ -4,7 +4,7 @@ import { MapResponsesWithDynamicTypes } from "./component/MapResponses";
 import { MakeEsriFeatureTypesPretty } from "./component/MakeEsriFeatureTypesPretty";
 import { GetFieldDomain } from "./component/GetFieldDomain";
 import { AddGeometryAndNamedValuesState } from "./component/AddGeometry";
-import { Geometry } from "@arcgis/core/geometry";
+import type { Geometry } from "@arcgis/core/geometry";
 
 interface Domain {
   code: string | number;

@@ -1,131 +1,39 @@
-import React, { useContext } from "react";
-
-import {
-  UsergroupAddOutlined,
-  PlusSquareOutlined,
-  BookOutlined,
-  EditOutlined,
-  TrademarkOutlined,
-  ToolOutlined,
-  CloudOutlined,
-  PhoneOutlined,
-  DollarOutlined,
-  FileTextOutlined,
-  FieldNumberOutlined,
-  ThunderboltOutlined,
-} from "@ant-design/icons";
+// components/Sidebar/DesktopSidebar.tsx
+import { useContext, useMemo } from "react";
+import { Layout, Menu } from "antd";
 import type { MenuProps } from "antd";
-import { Menu, theme } from "antd";
-import Sider from "antd/es/layout/Sider";
+import { SectorContext } from "../../Context/SectorsContext";
+import { buildSectorMenuItems } from "../../Utils/buildSectorMenuItems";
 
+const { Sider } = Layout;
 type MenuItem = Required<MenuProps>["items"][number];
 
-const items: MenuItem[] = [
-  {
-    key: "1",
-    icon: <PlusSquareOutlined />,
-    label: "البيانات العامة للبلدية",
-    children: [
-      {
-        key: "2",
-        icon: <UsergroupAddOutlined />,
-        label: "السكان الديموغرافيا و المساحة",
-      },
-      {
-        key: "3",
-        icon: <PlusSquareOutlined />,
-        label: "الصحة",
-      },
-      {
-        key: "4",
-        icon: <BookOutlined />,
-        label: "التعليم",
-      },
-      {
-        key: "5",
-        icon: <EditOutlined />,
-        label: "خدمات المهن وعقود الإيجار",
-      },
-      {
-        key: "6",
-        icon: <TrademarkOutlined />,
-        label: "خدمات التنظيم",
-      },
-      {
-        key: "7",
-        icon: <ToolOutlined />,
-        label: "الأعمال الإنشائية والصيانة",
-      },
-    ],
-  },
+const DesktopSidebar = () => {
+  const { sectors, selectedSector, setSelectedSector } = useContext(SectorContext);
+  console.log(sectors)
+  const items: MenuItem[] = useMemo(() => buildSectorMenuItems(sectors), [sectors]);
 
-  {
-    key: "8",
-    icon: <CloudOutlined />,
-    label: "البيئة و المناخ",
-    children: [
-      {
-        key: "9",
-        icon: <PhoneOutlined />,
-        label: "العلاقة مع المجتمع المحلي",
-      },
-    ],
-  },
 
-  {
-    key: "10",
-    icon: <DollarOutlined />,
-    label: "البيانات المالية",
-    children: [
-      {
-        key: "11",
-        icon: <FileTextOutlined />,
-        label: "الاستثمار",
-      },
-      {
-        key: "12",
-        icon: <FieldNumberOutlined />,
-        label: "الوصول الذاتي",
-      },
-      {
-        key: "13",
-        icon: <ThunderboltOutlined />,
-        label: "بيانات الطاقة",
-      },
-    ],
-  },
-];
+  const selectedKeys = selectedSector ? [`sector:${selectedSector}`] : [];
 
-const onClick: MenuProps["onClick"] = (e) => {
-  console.log("click", e);
-};
-
-interface CustomSidebarProps {
-  open: boolean;
-  onClose: () => void;
-}
-
-import { SidebarContext  } from "../../Context/SidebarContext";
-
-const CustomSidebar2 = () => {
-  const { open } = useContext(SidebarContext)
+  const onClick: MenuProps["onClick"] = (e) => {
+    if (e.keyPath?.length) {
+      const [, sectorKey] = (e.key as string).split("sector:");
+      if (sectorKey) setSelectedSector(sectorKey);
+    }
+  };
 
   return (
-    <Sider
-      trigger={null}
-      collapsed={open}
-      className="h-full"
-    >
-      <div className="h-[90vh] bg-white" >
-        <Menu
-          onClick={onClick}
-          mode="inline"
-          items={items}
-          className="break-words whitespace-normal"
-        />
-      </div>
+    <Sider width={260} theme="light">
+      <Menu
+        mode="inline"
+        onClick={onClick}
+        items={items}
+        selectedKeys={selectedKeys}
+        className="break-words whitespace-normal"
+      />
     </Sider>
   );
 };
 
-export default CustomSidebar2;
+export default DesktopSidebar;

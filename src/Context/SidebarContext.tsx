@@ -22,7 +22,6 @@ export const SidebarProvider = ({ children }: { children: React.ReactNode }) => 
     const handleResize = () => {
       const isMobile = window.innerWidth < 768;
       setScreenType(isMobile ? "mobile" : "desktop");
-      // ❌ Don't touch `open` anymore
     };
 
     window.addEventListener("resize", handleResize);

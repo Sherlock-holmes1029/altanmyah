@@ -14,8 +14,9 @@ function Header() {
         className="w-full items-center"
         justify="space-between"
         align="middle"
+        wrap={false}
       >
-        <Col xs={24} sm={8} className="flex  items-center justify-start gap-10">
+        <Col xs={8} sm={8} className="flex  items-center justify-start gap-10">
           <div className="flex items-center gap-2">
             <MenuOutlined
               className="cursor-pointer text-xl hover:text-yellow-300"
@@ -23,15 +24,14 @@ function Header() {
             />
             <Link
               to="/"
-              className="text-white hover:text-yellow-300 font-medium text-sm"
+              className=" hidden sm:inline text-white hover:text-yellow-300 font-medium text-sm"
             >
               بنك تنمية المدن والقرى- نظام المرصد التنموي
             </Link>
           </div>
         </Col>
 
-        {/* Center: Logo */}
-        <Col xs={24} sm={8} className="flex justify-center align-middle">
+        <Col xs={8} sm={8} className="flex justify-center align-middle">
           <div className="flex items-center justify-center">
               <img
                 src={logo}
@@ -43,12 +43,12 @@ function Header() {
         </Col>
 
         
-        <Col xs={24} sm={8} className="flex items-center justify-end gap-3">
+        <Col xs={8} sm={8} className="flex items-center justify-end gap-3">
           <div className="flex items-end justify-end gap-2">
-            <span className="cursos-pointer hover:text-yellow-300 sm:inline text-sm">
+            <span className="hidden cursos-pointer hover:text-yellow-300 sm:inline text-sm">
               أهلا وسهلا .. مسؤول بلديات
             </span>
-            <span>|</span>
+            <span className="hidden sm:inline" >|</span>
             <Link to="">
               <LogoutOutlined className="cursor-pointer hover:text-yellow-300" />
             </Link>

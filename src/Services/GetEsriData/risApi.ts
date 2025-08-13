@@ -14,7 +14,6 @@ async function esriGet(params: Record<string, unknown>): Promise<EsriQueryRespon
   return data;
 }
 
-// Distinct helper (typed) using returnDistinctValues (CORS-safe)
 async function distinct<T extends string | number>(
   token: string,
   field: string,
@@ -22,7 +21,7 @@ async function distinct<T extends string | number>(
 ): Promise<T[]> {
   const data = await esriGet({
     where,
-    outFields: field,
+    outFields: "*",
     returnDistinctValues: true,
     orderByFields: field,
     token,
@@ -59,7 +58,7 @@ function sectorFieldFor(adminLevel: string) {
 export async function getSectors(token: string, adminLevel: string, period: string) {
   const field = sectorFieldFor(adminLevel);
   const where = `isFlag = 0 AND Is_Active = 1 AND Admin_Level IN (${adminLevel}) AND Period = ${period}`;
-  const list = await distinct<string>(token, field, where);
+  const list = await distinct<any>(token, field, where);
   return list.map((v) => ({ value: v, label: v }));
 }
 
